@@ -651,9 +651,9 @@ body {
 .revenue-stat-card:hover {
     border-color: rgba(255,255,255,0.1);
 }
-.revenue-stat-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; font-weight: 500; }
-.revenue-stat-value { font-size: 30px; font-weight: 800; color: var(--text-primary); }
-.revenue-stat-sub   { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
+.revenue-stat-label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.revenue-stat-value { display: block; font-size: 28px; font-weight: 800; color: var(--text-primary); line-height: 1.2; }
+.revenue-stat-sub   { display: block; font-size: 12px; color: var(--text-secondary); margin-top: 8px; font-weight: 500; }
 
 /* ANALYTICS GRID */
 .analytics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
