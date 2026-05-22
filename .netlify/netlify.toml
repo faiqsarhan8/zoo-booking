@@ -9,7 +9,6 @@ redirects = []
 [build]
 publish = "C:\\Users\\User\\.gemini\\antigravity\\scratch\\zoo-booking-prototype"
 publishOrigin = "default"
-base = "C:\\Users\\User\\.gemini\\antigravity\\scratch\\zoo-booking-prototype"
 
 [build.environment]
 
