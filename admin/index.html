@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo Adventure — Admin Dashboard</title>
+    <meta name="description" content="Admin analytics and management portal for Zoo Adventure ticketing system.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="login-logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="login-brand">ZOO ADVENTURE</div>
+                    <div class="login-sub">Admin Control Panel</div>
+                </div>
+            </div>
+            <h2 class="login-title">Sign In to Dashboard</h2>
+            <p class="login-desc">Restricted access — authorised personnel only.</p>
+            <form id="admin-login-form" onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label for="admin-email">Admin Email</label>
+                    <input type="email" id="admin-email" placeholder="admin@zooadventure.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-pass">Password</label>
+                    <input type="password" id="admin-pass" placeholder="••••••••" required>
+                </div>
+                <div id="login-error" class="login-error hidden">Invalid email or password.</div>
+                <button type="submit" class="btn-login">Sign In</button>
+            </form>
+            <p class="login-hint">Demo: <strong>admin@zooadventure.com</strong> / <strong>admin123</strong></p>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="dashboard-app" class="dashboard-app hidden">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="sidebar-brand-text">
+                    <span class="brand-main">ZOO ADMIN</span>
+                    <span class="brand-sub">Control Panel</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" id="nav-overview" onclick="switchTab('overview', event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    Overview
+                </a>
+                <a href="#" class="nav-item" id="nav-bookings" onclick="switchTab('bookings', event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                    All Bookings
+                </a>
+                <a href="#" class="nav-item" id="nav-analytics" onclick="switchTab('analytics', event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    Analytics
+                </a>
+                <a href="#" class="nav-item" id="nav-users" onclick="switchTab('users', event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    Users
+                </a>
+                <a href="#" class="nav-item" id="nav-tickets" onclick="switchTab('tickets', event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 010 6v2a2 2 0 002 2h16a2 2 0 002-2v-2a3 3 0 010-6V7a2 2 0 00-2-2H4a2 2 0 00-2 2v2z"/></svg>
+                    Ticket Types
+                </a>
+                <a href="#" class="nav-item" id="nav-revenue" onclick="switchTab('revenue', event)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    Revenue
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="admin-profile">
+                    <div class="admin-avatar" id="sidebar-admin-avatar">A</div>
+                    <div class="admin-info">
+                        <span class="admin-name" id="sidebar-admin-name">Admin</span>
+                        <span class="admin-role">Super Admin</span>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="handleLogout()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP HEADER -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="hamburger" onclick="toggleSidebar()" id="hamburger-btn">
+                        <span></span><span></span><span></span>
+                    </button>
+                    <div class="page-title-area">
+                        <h1 id="page-title">Overview</h1>
+                        <span id="page-subtitle">Real-time zoo ticketing system data</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-date" id="header-date-display"></div>
+                    <button class="btn-refresh" onclick="refreshAllData()" title="Refresh Data">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB: OVERVIEW -->
+            <section id="tab-overview" class="tab-content active">
+
+                <!-- KPI CARDS ROW -->
+                <div class="kpi-grid">
+                    <div class="kpi-card kpi-blue">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9a3 3 0 010 6v2a2 2 0 002 2h16a2 2 0 002-2v-2a3 3 0 010-6V7a2 2 0 00-2-2H4a2 2 0 00-2 2v2z"/></svg>
+                        </div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total Bookings</span>
+                            <span class="kpi-value" id="kpi-total-bookings">0</span>
+                            <span class="kpi-change" id="kpi-total-bookings-change"></span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-green">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                        </div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total Revenue</span>
+                            <span class="kpi-value" id="kpi-total-revenue">RM 0</span>
+                            <span class="kpi-change" id="kpi-revenue-change"></span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-purple">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                        </div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Registered Users</span>
+                            <span class="kpi-value" id="kpi-total-users">0</span>
+                            <span class="kpi-change" id="kpi-users-change"></span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-orange">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Active Bookings</span>
+                            <span class="kpi-value" id="kpi-active-bookings">0</span>
+                            <span class="kpi-change" id="kpi-active-change"></span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-red">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        </div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Cancellations</span>
+                            <span class="kpi-value" id="kpi-cancelled">0</span>
+                            <span class="kpi-change" id="kpi-cancel-rate"></span>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-teal">
+                        <div class="kpi-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Avg. Ticket Value</span>
+                            <span class="kpi-value" id="kpi-avg-value">RM 0</span>
+                            <span class="kpi-change" id="kpi-avg-change"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARTS ROW -->
+                <div class="charts-row">
+                    <!-- Monthly Bookings Bar Chart -->
+                    <div class="chart-card wide-chart">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Monthly Bookings Trend</h3>
+                                <p>Number of bookings per month</p>
+                            </div>
+                        </div>
+                        <div class="bar-chart-wrap">
+                            <div class="bar-chart" id="monthly-bar-chart"></div>
+                            <div class="bar-chart-labels" id="monthly-bar-labels"></div>
+                        </div>
+                    </div>
+
+                    <!-- Package Donut Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Package Distribution</h3>
+                                <p>% of bookings per package</p>
+                            </div>
+                        </div>
+                        <div class="donut-chart-wrap">
+                            <svg class="donut-svg" viewBox="0 0 200 200" id="donut-svg"></svg>
+                            <div class="donut-legend" id="donut-legend"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity + Quick Stats -->
+                <div class="bottom-row">
+                    <div class="chart-card flex-grow">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Recent Bookings</h3>
+                                <p>Latest 5 transactions</p>
+                            </div>
+                        </div>
+                        <div class="recent-table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>Customer</th>
+                                        <th>Package</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-bookings-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="chart-card side-stats">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Ticket Breakdown</h3>
+                                <p>Visitors by type</p>
+                            </div>
+                        </div>
+                        <div id="ticket-breakdown-list" class="breakdown-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: ALL BOOKINGS -->
+            <section id="tab-bookings" class="tab-content">
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="bookings-search" placeholder="Search by ID, customer, package..." oninput="filterBookingsTable()">
+                    </div>
+                    <div class="filter-row">
+                        <select id="filter-status" onchange="filterBookingsTable()">
+                            <option value="">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <select id="filter-package" onchange="filterBookingsTable()">
+                            <option value="">All Packages</option>
+                            <option value="Family Package">Family Package</option>
+                            <option value="School Trip">School Trip</option>
+                            <option value="VIP Experience">VIP Experience</option>
+                            <option value="Annual Pass">Annual Pass</option>
+                            <option value="Standard Admission">Standard Admission</option>
+                        </select>
+                        <button class="btn-export" onclick="exportCSV()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Export CSV
+                        </button>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <table class="data-table full-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('bookingId')">Booking ID <span class="sort-icon">↕</span></th>
+                                <th onclick="sortTable('billingName')">Customer <span class="sort-icon">↕</span></th>
+                                <th onclick="sortTable('billingEmail')">Email <span class="sort-icon">↕</span></th>
+                                <th onclick="sortTable('packageName')">Package <span class="sort-icon">↕</span></th>
+                                <th>Tickets</th>
+                                <th onclick="sortTable('visitDate')">Visit Date <span class="sort-icon">↕</span></th>
+                                <th onclick="sortTable('paidAmount')">Amount <span class="sort-icon">↕</span></th>
+                                <th onclick="sortTable('status')">Status <span class="sort-icon">↕</span></th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-bookings-tbody"></tbody>
+                    </table>
+                    <div class="table-footer">
+                        <span id="bookings-count-label">Showing 0 records</span>
+                        <div class="pagination" id="bookings-pagination"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: ANALYTICS -->
+            <section id="tab-analytics" class="tab-content">
+                <div class="analytics-grid">
+                    <!-- Monthly Revenue Line Chart -->
+                    <div class="chart-card full-width-chart">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Monthly Revenue (RM)</h3>
+                                <p>Total revenue collected per month in 2026</p>
+                            </div>
+                        </div>
+                        <div class="line-chart-wrap">
+                            <svg class="line-chart-svg" viewBox="0 0 900 300" preserveAspectRatio="none" id="revenue-line-svg"></svg>
+                            <div class="line-chart-labels" id="revenue-line-labels"></div>
+                        </div>
+                    </div>
+
+                    <!-- Package % Horizontal Bar -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Package Popularity</h3>
+                                <p>Percentage share of each package type</p>
+                            </div>
+                        </div>
+                        <div id="package-horiz-chart" class="horiz-bar-list"></div>
+                    </div>
+
+                    <!-- Addons Usage -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Add-on Usage</h3>
+                                <p>How often each add-on is booked</p>
+                            </div>
+                        </div>
+                        <div id="addon-stats-list" class="horiz-bar-list"></div>
+                    </div>
+
+                    <!-- Cancellation Rate -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Booking Status Ratio</h3>
+                                <p>Active vs Cancelled</p>
+                            </div>
+                        </div>
+                        <div class="status-ratio-wrap" id="status-ratio-wrap"></div>
+                    </div>
+
+                    <!-- Visitor Type Breakdown -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Visitor Type Distribution</h3>
+                                <p>Adult / Child / Senior breakdown</p>
+                            </div>
+                        </div>
+                        <div id="visitor-type-chart" class="horiz-bar-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: USERS -->
+            <section id="tab-users" class="tab-content">
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="users-search" placeholder="Search by name or email..." oninput="filterUsersTable()">
+                    </div>
+                </div>
+                <div class="table-card">
+                    <table class="data-table full-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Total Bookings</th>
+                                <th>Total Spent</th>
+                                <th>Last Booking</th>
+                                <th>Account Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody"></tbody>
+                    </table>
+                    <div class="table-footer">
+                        <span id="users-count-label">Showing 0 users</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: TICKET TYPES -->
+            <section id="tab-tickets" class="tab-content">
+                <div class="ticket-stats-grid" id="ticket-stats-grid"></div>
+            </section>
+
+            <!-- TAB: REVENUE -->
+            <section id="tab-revenue" class="tab-content">
+                <div class="revenue-summary-row" id="revenue-summary-row"></div>
+                <div class="charts-row mt-4">
+                    <div class="chart-card wide-chart">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Revenue by Package Type</h3>
+                                <p>Total RM collected per package category</p>
+                            </div>
+                        </div>
+                        <div id="revenue-by-package" class="horiz-bar-list big-horiz"></div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Monthly Avg. Booking Value</h3>
+                                <p>Average RM per transaction per month</p>
+                            </div>
+                        </div>
+                        <div class="bar-chart-wrap small-bar-wrap">
+                            <div class="bar-chart" id="avg-value-chart"></div>
+                            <div class="bar-chart-labels" id="avg-value-labels"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="admin-footer">
+                <p>&copy; 2026 Eyesoft Technology. All rights reserved.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- BOOKING DETAIL MODAL -->
+    <div id="booking-modal" class="modal-overlay hidden" onclick="closeBookingModal(event)">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Booking Details</h3>
+                <button class="modal-close" onclick="document.getElementById('booking-modal').classList.add('hidden')">✕</button>
+            </div>
+            <div class="modal-body" id="booking-modal-body"></div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

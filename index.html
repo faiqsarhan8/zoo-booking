@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo Adventure - Premium Online Ticketing System</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- TOP APP HEADER — floats over the hero on the homepage -->
+        <header class="app-header" id="app-header">
+            <div class="header-content">
+                <!-- Hamburger Menu Button -->
+                <button class="hamburger-btn" id="mobile-menu-toggle" onclick="toggleMobileMenu()"
+                    aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Branding Logo -->
+                <div class="logo-area" onclick="resetToHome()">
+                    <div class="logo-circle-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14h-2v-2h2zm0-4h-2V7h2z" />
+                        </svg>
+                    </div>
+                    <div class="logo-text-block">
+                        <span class="logo-main">ZOO <span>ADVENTURE</span></span>
+                        <span class="logo-sub">EXPLORE • LEARN • PROTECT</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="main-nav">
+                    <a href="#" onclick="resetToHome()" class="nav-link active" id="nav-home">Home</a>
+                    <a href="#" onclick="goToStep(2)" class="nav-link" id="nav-packages">Packages</a>
+                    <a href="#" onclick="goToStep(3)" class="nav-link" id="nav-tickets">Book Tickets</a>
+                    <a href="#" onclick="goToStep('accommodation')" class="nav-link" id="nav-accom">Accommodation</a>
+                    <a href="#" onclick="openModal('about-modal')">About Us</a>
+                    <a href="#" onclick="showDashboard()" class="nav-link" id="nav-dashboard">My Bookings</a>
+                </nav>
+
+                <!-- Action Items (Cart & Profile Session) -->
+                <div class="header-actions">
+                    <!-- Shopping Cart Dynamic Icon -->
+                    <div class="cart-icon-btn hero-cart" onclick="goToStep(6)" title="Review Cart">
+                        <svg class="cart-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                        <span class="cart-badge" id="cart-badge-count">0</span>
+                    </div>
+
+                    <!-- User Session Account Box -->
+                    <div id="auth-session-area" class="auth-session-box"></div>
+
+                    <!-- Login pill button (shown by JS) -->
+                    <button class="btn btn-pill-login" id="hero-login-btn"
+                        onclick="openAuthModal('login')">Login</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN VIEWPORTS -->
+        <main class="main-content">
+
+            <!-- STEP 1: HOMEPAGE (FULL-BLEED HERO) -->
+            <section id="step-1" class="booking-step active hero-fullbleed-section">
+
+                <!-- Full-bleed Hero Banner -->
+                <div class="hero-fullbleed">
+                    <!-- Background Carousel Images -->
+                    <div class="hero-bg-carousel">
+                        <img src="https://images.unsplash.com/photo-1547721064-da6cfb341d50?auto=format&fit=crop&q=80&w=1600"
+                            alt="Giraffe" class="hero-bg-slide active">
+                        <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&q=80&w=1600"
+                            alt="Siberian Tiger" class="hero-bg-slide">
+                        <img src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&q=80&w=1600"
+                            alt="Elephant" class="hero-bg-slide">
+                        <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&q=80&w=1600"
+                            alt="Giant Panda" class="hero-bg-slide">
+                        <img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&q=80&w=1600"
+                            alt="African Lion" class="hero-bg-slide">
+                    </div>
+                    <!-- Dark gradient overlay on left -->
+                    <div class="hero-overlay"></div>
+
+                    <!-- Text content over image -->
+                    <div class="hero-text-block">
+                        <h1 class="hero-headline">
+                            Discover.<br>
+                            Explore.<br>
+                            Connect.
+                        </h1>
+                        <p class="hero-sub">An unforgettable adventure<br>awaits you at ZooWorld.</p>
+                        <div class="hero-btn-row">
+                            <button class="btn hero-btn-book" onclick="goToStep(3)">Book Tickets</button>
+                            <button class="btn hero-btn-explore" onclick="goToStep(2)">Explore Packages</button>
+                        </div>
+                    </div>
+
+                    <!-- Hero Carousel Dots -->
+                    <div class="hero-carousel-dots">
+                        <span class="hero-dot active" onclick="setHeroSlide(0)"></span>
+                        <span class="hero-dot" onclick="setHeroSlide(1)"></span>
+                        <span class="hero-dot" onclick="setHeroSlide(2)"></span>
+                        <span class="hero-dot" onclick="setHeroSlide(3)"></span>
+                        <span class="hero-dot" onclick="setHeroSlide(4)"></span>
+                    </div>
+                </div>
+
+                <!-- Content below the hero -->
+                <div class="below-hero-content">
+                    <!-- 12 Simple Steps Path Indicator -->
+                    <div class="steps-funnel-container">
+                        <h3>Easy Ticket Booking in 12 Simple Steps</h3>
+                        <div class="steps-horizontal-path">
+                            <div class="funnel-dot active" onclick="goToStep(1)"><span class="num">1</span><span
+                                    class="lbl">Homepage</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(2)"><span class="num">2</span><span
+                                    class="lbl">Browse Packages</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(3)"><span class="num">3</span><span
+                                    class="lbl">Select Ticket</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(4)"><span class="num">4</span><span
+                                    class="lbl">Select Date</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(5)"><span class="num">5</span><span
+                                    class="lbl">Add-ons / Promos</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(6)"><span class="num">6</span><span
+                                    class="lbl">Cart Review</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(7)"><span class="num">7</span><span
+                                    class="lbl">Login / Guest</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot" onclick="goToStep(8)"><span class="num">8</span><span
+                                    class="lbl">Payment Choice</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot"><span class="num">9</span><span class="lbl">Payment
+                                    Processing</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot"><span class="num">10</span><span class="lbl">Payment Success</span>
+                            </div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot"><span class="num">11</span><span class="lbl">E-Ticket</span></div>
+                            <div class="funnel-arrow">➔</div>
+                            <div class="funnel-dot"><span class="num">12</span><span class="lbl">Ticket Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Feature Grid Section -->
+                    <div class="feature-info-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon bg-green">🐯</div>
+                            <div class="feature-text">
+                                <h4>Amazing Wildlife</h4>
+                                <p>Explore diverse species and beautiful habitats.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon bg-orange">👨‍👩‍👧‍👦</div>
+                            <div class="feature-text">
+                                <h4>Family Friendly</h4>
+                                <p>Perfect experiences for visitors of all ages.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon bg-blue">🔒</div>
+                            <div class="feature-text">
+                                <h4>Secure &amp; Easy</h4>
+                                <p>Safe payments and hassle-free booking.</p>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon bg-purple">🎧</div>
+                            <div class="feature-text">
+                                <h4>Guest Support</h4>
+                                <p>We're here to help you 24/7.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Green Guarantee Badges -->
+                    <div class="green-guarantee-bar">
+                        <span>📅 Easy Online Booking</span>
+                        <span>💳 Multiple Payment Options</span>
+                        <span>🎟️ Instant E-Tickets</span>
+                        <span>📱 Mobile Access</span>
+                        <span>🛡️ Safe &amp; Secure</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 2: BROWSE ZOO PACKAGES -->
+            <section id="step-2" class="booking-step">
+                <!-- Funnel Breadcrumb -->
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-2"></div>
+
+                <div class="section-title-area text-center">
+                    <h2>Choose Your Perfect Experience</h2>
+                    <p>Select the best package that suits your adventure</p>
+                </div>
+
+                <div class="packages-grid">
+                    <!-- Family Package -->
+                    <div class="package-card" id="pkg-family">
+                        <div class="package-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?auto=format&fit=crop&q=80&w=400"
+                                alt="Family" class="pkg-img">
+                        </div>
+                        <div class="package-details">
+                            <h3>Family Package</h3>
+                            <p class="description">Fun for the whole family (2 Adults + 2 Kids)</p>
+                            <p class="price-from">From <span>RM 149</span></p>
+                            <button class="btn btn-primary btn-block" onclick="selectPackage('family')">Select
+                                Package</button>
+                        </div>
+                    </div>
+
+                    <!-- School Trip -->
+                    <div class="package-card" id="pkg-school">
+                        <div class="package-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=400"
+                                alt="School" class="pkg-img">
+                        </div>
+                        <div class="package-details">
+                            <h3>School Trip</h3>
+                            <p class="description">Educational & exciting group excursions (Min 15 pax)</p>
+                            <p class="price-from">From <span>RM 25</span></p>
+                            <button class="btn btn-primary btn-block" onclick="selectPackage('school')">Select
+                                Package</button>
+                        </div>
+                    </div>
+
+                    <!-- VIP Experience -->
+                    <div class="package-card" id="pkg-vip">
+                        <div class="package-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&q=80&w=400"
+                                alt="VIP" class="pkg-img">
+                        </div>
+                        <div class="package-details">
+                            <h3>VIP Experience</h3>
+                            <p class="description">Exclusive tour guides & behind-the-scenes animal feeds</p>
+                            <p class="price-from">From <span>RM 299</span></p>
+                            <button class="btn btn-primary btn-block" onclick="selectPackage('vip')">Select
+                                Package</button>
+                        </div>
+                    </div>
+
+                    <!-- Annual Pass -->
+                    <div class="package-card" id="pkg-annual">
+                        <div class="package-img-wrapper">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=400"
+                                alt="Annual Pass" class="pkg-img">
+                        </div>
+                        <div class="package-details">
+                            <h3>Annual Pass</h3>
+                            <p class="description">Unlimited free entries, retail & tram discounts for 1 year</p>
+                            <p class="price-from">From <span>RM 199</span></p>
+                            <button class="btn btn-primary btn-block" onclick="selectPackage('annual')">Select
+                                Package</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-footer text-center">
+                    <button class="btn btn-outline btn-large" onclick="goToStep(1)">Back to Homepage</button>
+                </div>
+            </section>
+
+            <!-- STEP 3: SELECT TICKET -->
+            <section id="step-3" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-3"></div>
+
+                <div class="step-card card">
+                    <div class="step-card-header">
+                        <h2>Select Ticket Type</h2>
+                        <p>Choose the ticket category that applies to you</p>
+                    </div>
+
+                    <div class="ticket-type-grid">
+                        <!-- Adult -->
+                        <div class="ticket-type-card">
+                            <div class="ticket-avatar">👨</div>
+                            <h3>Adult</h3>
+                            <p class="age-range">Ages 13 - 59</p>
+                            <p class="price-tag">RM 45.00</p>
+                            <div class="counter-control">
+                                <button class="counter-btn" onclick="adjustTicket('adult', -1)">-</button>
+                                <span class="counter-value" id="t-qty-adult">0</span>
+                                <button class="counter-btn" onclick="adjustTicket('adult', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Child -->
+                        <div class="ticket-type-card">
+                            <div class="ticket-avatar child-avatar">👧</div>
+                            <h3>Child</h3>
+                            <p class="age-range">Ages 3 - 12</p>
+                            <p class="price-tag">RM 25.00</p>
+                            <div class="counter-control">
+                                <button class="counter-btn" onclick="adjustTicket('child', -1)">-</button>
+                                <span class="counter-value" id="t-qty-child">0</span>
+                                <button class="counter-btn" onclick="adjustTicket('child', 1)">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Senior Citizen -->
+                        <div class="ticket-type-card">
+                            <div class="ticket-avatar senior-avatar">👵</div>
+                            <h3>Senior Citizen</h3>
+                            <p class="age-range">Ages 60+</p>
+                            <p class="price-tag">RM 20.00</p>
+                            <div class="counter-control">
+                                <button class="counter-btn" onclick="adjustTicket('senior', -1)">-</button>
+                                <span class="counter-value" id="t-qty-senior">0</span>
+                                <button class="counter-btn" onclick="adjustTicket('senior', 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-footer flex-row justify-between">
+                        <button class="btn btn-outline btn-large" onclick="goToStep(2)">Back</button>
+                        <button class="btn btn-primary btn-large btn-step-width" onclick="validateStep3To4()">Next:
+                            Select Date</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 4: SELECT VISIT DATE & QUANTITY -->
+            <section id="step-4" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-4"></div>
+
+                <div class="step-card card">
+                    <div class="step-card-header">
+                        <h2>Select Visit Date & Quantity</h2>
+                    </div>
+
+                    <div class="date-qty-layout">
+                        <!-- Calendar Selection -->
+                        <div class="calendar-selection-panel">
+                            <h3>Select Visit Date</h3>
+                            <div class="calendar-widget">
+                                <div class="calendar-header">
+                                    <button class="cal-nav-btn" onclick="adjustCalMonth(-1)">‹</button>
+                                    <span class="cal-title" id="cal-month-title">May 2026</span>
+                                    <button class="cal-nav-btn" onclick="adjustCalMonth(1)">›</button>
+                                </div>
+                                <div class="calendar-weekdays">
+                                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                                </div>
+                                <div class="calendar-days" id="calendar-days-grid">
+                                    <!-- Populated dynamically via JS -->
+                                </div>
+                            </div>
+                            <input type="hidden" id="calendar-selected-value">
+                        </div>
+
+                        <!-- Quantity Selector -->
+                        <div class="quantity-adjustment-panel">
+                            <h3>Quantity</h3>
+
+                            <div class="row-qty-item">
+                                <span class="qty-name">Adult (RM 45.00)</span>
+                                <div class="counter-control">
+                                    <button class="counter-btn" onclick="adjustTicket('adult', -1)">-</button>
+                                    <span class="counter-value" id="d-qty-adult">0</span>
+                                    <button class="counter-btn" onclick="adjustTicket('adult', 1)">+</button>
+                                </div>
+                            </div>
+
+                            <div class="row-qty-item">
+                                <span class="qty-name">Child (RM 25.00)</span>
+                                <div class="counter-control">
+                                    <button class="counter-btn" onclick="adjustTicket('child', -1)">-</button>
+                                    <span class="counter-value" id="d-qty-child">0</span>
+                                    <button class="counter-btn" onclick="adjustTicket('child', 1)">+</button>
+                                </div>
+                            </div>
+
+                            <div class="row-qty-item">
+                                <span class="qty-name">Senior Citizen (RM 20.00)</span>
+                                <div class="counter-control">
+                                    <button class="counter-btn" onclick="adjustTicket('senior', -1)">-</button>
+                                    <span class="counter-value" id="d-qty-senior">0</span>
+                                    <button class="counter-btn" onclick="adjustTicket('senior', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-footer flex-row justify-between mt-6">
+                        <button class="btn btn-outline btn-large" onclick="goToStep(3)">Back</button>
+                        <button class="btn btn-primary btn-large" onclick="validateStep4()">Next: Add-ons</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 5: ADD-ONS / PROMO ITEMS -->
+            <section id="step-5" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-5"></div>
+
+                <div class="step-card card">
+                    <div class="step-card-header">
+                        <h2>Enhance Your Visit</h2>
+                        <p>Add exciting experiences to make your trip unforgettable!</p>
+                    </div>
+
+                    <div class="addons-list">
+                        <!-- Feeding Session -->
+                        <div class="addon-row-item">
+                            <label class="addon-label-checkbox">
+                                <input type="checkbox" id="chk-addon-feeding" onchange="syncCheckboxAddon('feeding')">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <img src="https://images.unsplash.com/photo-1547721064-da6cfb341d50?auto=format&fit=crop&q=80&w=150"
+                                alt="Feeding" class="addon-thumb-img">
+                            <div class="addon-info-text">
+                                <h3>Feeding Session</h3>
+                                <p>Get up close and feed our friendly animals.</p>
+                                <span class="addon-rate">RM 20.00</span>
+                            </div>
+                            <div class="addon-qty-dropdown">
+                                <select id="sel-addon-feeding" onchange="syncDropdownAddon('feeding')">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Tram Ride -->
+                        <div class="addon-row-item">
+                            <label class="addon-label-checkbox">
+                                <input type="checkbox" id="chk-addon-tram" onchange="syncCheckboxAddon('tram')">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <img src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?auto=format&fit=crop&q=80&w=150"
+                                alt="Tram" class="addon-thumb-img">
+                            <div class="addon-info-text">
+                                <h3>Tram Ride</h3>
+                                <p>Enjoy a comfortable ride around the zoo.</p>
+                                <span class="addon-rate">RM 15.00</span>
+                            </div>
+                            <div class="addon-qty-dropdown">
+                                <select id="sel-addon-tram" onchange="syncDropdownAddon('tram')">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Souvenir Package -->
+                        <div class="addon-row-item">
+                            <label class="addon-label-checkbox">
+                                <input type="checkbox" id="chk-addon-souvenir" onchange="syncCheckboxAddon('souvenir')">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=150"
+                                alt="Souvenir" class="addon-thumb-img">
+                            <div class="addon-info-text">
+                                <h3>Souvenir Package</h3>
+                                <p>Take home memories of your adventure.</p>
+                                <span class="addon-rate">RM 25.00</span>
+                            </div>
+                            <div class="addon-qty-dropdown">
+                                <select id="sel-addon-souvenir" onchange="syncDropdownAddon('souvenir')">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-footer flex-row justify-between mt-6">
+                        <button class="btn btn-outline btn-large" onclick="goToStep(4)">Back</button>
+                        <button class="btn btn-primary btn-large" onclick="goToStep(55)">Next: Accommodation &amp;
+                            Transport</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 5B: ACCOMMODATION & TRANSPORT -->
+            <section id="step-55" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-55"></div>
+
+                <div class="step-card card" style="max-width:1000px;">
+                    <div class="step-card-header">
+                        <h2>🏨 Accommodation &amp; 🚌 Transport</h2>
+                        <p>Optional: Add hotel stay and transport to complete your zoo adventure package.</p>
+                    </div>
+
+                    <!-- ACCOMMODATION SECTION -->
+                    <div class="accom-section">
+                        <div class="accom-section-title">
+                            <span class="section-badge hotel-badge">🏨 Accommodation</span>
+                            <span class="section-note">Select 1 hotel option — or skip if not required</span>
+                        </div>
+
+                        <div class="accom-transport-grid">
+                            <!-- Budget Hotel -->
+                            <div class="accom-card" id="hotel-budget" onclick="selectHotel('budget')">
+                                <div class="accom-card-img">
+                                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=400"
+                                        alt="Budget Hotel">
+                                    <div class="accom-price-badge">RM 99 / night</div>
+                                </div>
+                                <div class="accom-card-info">
+                                    <div class="accom-radio-row">
+                                        <div class="accom-radio-dot" id="radio-hotel-budget"></div>
+                                        <h3>Budget Inn</h3>
+                                    </div>
+                                    <p>Clean &amp; comfortable accommodation near the zoo. Free Wi-Fi included.</p>
+                                    <div class="accom-features">
+                                        <span>⭐⭐⭐</span>
+                                        <span>🍳 Breakfast</span>
+                                        <span>📶 Wi-Fi</span>
+                                    </div>
+                                    <div class="accom-nights-row">
+                                        <label>Number of Nights:</label>
+                                        <div class="counter-control">
+                                            <button class="counter-btn"
+                                                onclick="event.stopPropagation(); adjustHotelNights('budget', -1)">-</button>
+                                            <span class="counter-value" id="nights-budget">1</span>
+                                            <button class="counter-btn"
+                                                onclick="event.stopPropagation(); adjustHotelNights('budget', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Standard Hotel -->
+                            <div class="accom-card" id="hotel-standard" onclick="selectHotel('standard')">
+                                <div class="accom-card-img">
+                                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&q=80&w=400"
+                                        alt="Standard Hotel">
+                                    <div class="accom-price-badge popular">RM 179 / night</div>
+                                </div>
+                                <div class="accom-card-info">
+                                    <div class="accom-radio-row">
+                                        <div class="accom-radio-dot" id="radio-hotel-standard"></div>
+                                        <h3>Standard Hotel ⭐ Popular</h3>
+                                    </div>
+                                    <p>4-star hotel with a swimming pool &amp; buffet restaurant. Strategic location.
+                                    </p>
+                                    <div class="accom-features">
+                                        <span>⭐⭐⭐⭐</span>
+                                        <span>🏊 Swimming Pool</span>
+                                        <span>🍽️ Buffet</span>
+                                    </div>
+                                    <div class="accom-nights-row">
+                                        <label>Number of Nights:</label>
+                                        <div class="counter-control">
+                                            <button class="counter-btn"
+                                                onclick="event.stopPropagation(); adjustHotelNights('standard', -1)">-</button>
+                                            <span class="counter-value" id="nights-standard">1</span>
+                                            <button class="counter-btn"
+                                                onclick="event.stopPropagation(); adjustHotelNights('standard', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Premium Resort -->
+                            <div class="accom-card" id="hotel-premium" onclick="selectHotel('premium')">
+                                <div class="accom-card-img">
+                                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=400"
+                                        alt="Premium Resort">
+                                    <div class="accom-price-badge luxury">RM 349 / night</div>
+                                </div>
+                                <div class="accom-card-info">
+                                    <div class="accom-radio-row">
+                                        <div class="accom-radio-dot" id="radio-hotel-premium"></div>
+                                        <h3>Premium Resort 🌟 Luxury</h3>
+                                    </div>
+                                    <p>Luxury stay experience with spa, infinity pool &amp; butler service.</p>
+                                    <div class="accom-features">
+                                        <span>⭐⭐⭐⭐⭐</span>
+                                        <span>🧖 Spa</span>
+                                        <span>🌊 Infinity Pool</span>
+                                    </div>
+                                    <div class="accom-nights-row">
+                                        <label>Number of Nights:</label>
+                                        <div class="counter-control">
+                                            <button class="counter-btn"
+                                                onclick="event.stopPropagation(); adjustHotelNights('premium', -1)">-</button>
+                                            <span class="counter-value" id="nights-premium">1</span>
+                                            <button class="counter-btn"
+                                                onclick="event.stopPropagation(); adjustHotelNights('premium', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- No hotel option -->
+                        <div class="no-accom-option" id="hotel-none" onclick="selectHotel(null)">
+                            <div class="accom-radio-dot active" id="radio-hotel-none"></div>
+                            <span>No accommodation — I do not require a hotel</span>
+                        </div>
+                    </div>
+
+                    <div class="accom-divider"></div>
+
+                    <!-- TRANSPORT SECTION -->
+                    <div class="accom-section">
+                        <div class="accom-section-title">
+                            <span class="section-badge transport-badge">🚌 Transport</span>
+                            <span class="section-note">Select transportation mode to the zoo — or skip if you have your
+                                own vehicle</span>
+                        </div>
+
+                        <div class="accom-transport-grid">
+                            <!-- Shuttle Bus -->
+                            <div class="accom-card" id="transport-shuttle" onclick="selectTransport('shuttle')">
+                                <div class="accom-card-img transport-img">
+                                    <div class="transport-icon-big">🚌</div>
+                                    <div class="accom-price-badge">RM 15 / pax</div>
+                                </div>
+                                <div class="accom-card-info">
+                                    <div class="accom-radio-row">
+                                        <div class="accom-radio-dot" id="radio-transport-shuttle"></div>
+                                        <h3>Shuttle Bus</h3>
+                                    </div>
+                                    <p>Shuttle bus from the nearest LRT station. Safe &amp; punctual.</p>
+                                    <div class="accom-features">
+                                        <span>🕐 Every 30 min</span>
+                                        <span>❄️ Air-conditioned</span>
+                                        <span>♿ Accessible</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Private Car -->
+                            <div class="accom-card" id="transport-car" onclick="selectTransport('car')">
+                                <div class="accom-card-img transport-img">
+                                    <div class="transport-icon-big">🚗</div>
+                                    <div class="accom-price-badge popular">RM 65 / trip</div>
+                                </div>
+                                <div class="accom-card-info">
+                                    <div class="accom-radio-row">
+                                        <div class="accom-radio-dot" id="radio-transport-car"></div>
+                                        <h3>Private Car ⭐ Popular</h3>
+                                    </div>
+                                    <p>Private car from your preferred location. Flexible &amp; comfortable.</p>
+                                    <div class="accom-features">
+                                        <span>📍 Door-to-door</span>
+                                        <span>💼 Free luggage</span>
+                                        <span>👨‍✈️ Professional driver</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Limousine -->
+                            <div class="accom-card" id="transport-limo" onclick="selectTransport('limo')">
+                                <div class="accom-card-img transport-img">
+                                    <div class="transport-icon-big">🚙</div>
+                                    <div class="accom-price-badge luxury">RM 150 / trip</div>
+                                </div>
+                                <div class="accom-card-info">
+                                    <div class="accom-radio-row">
+                                        <div class="accom-radio-dot" id="radio-transport-limo"></div>
+                                        <h3>Limousine 🌟 VIP</h3>
+                                    </div>
+                                    <p>Luxury vehicle with a private driver. VIP experience from start to finish.</p>
+                                    <div class="accom-features">
+                                        <span>🍾 Mini Bar</span>
+                                        <span>🎵 Sound System</span>
+                                        <span>🛡️ Premium Safety</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- No transport option -->
+                        <div class="no-accom-option" id="transport-none" onclick="selectTransport(null)">
+                            <div class="accom-radio-dot active" id="radio-transport-none"></div>
+                            <span>No transport — I have my own vehicle</span>
+                        </div>
+                    </div>
+
+                    <!-- Selected Summary Banner -->
+                    <div class="accom-summary-banner" id="accom-summary-banner">
+                        <div id="accom-summary-text">✅ No additional options selected</div>
+                    </div>
+
+                    <div class="action-footer flex-row justify-between mt-6">
+                        <button class="btn btn-outline btn-large" onclick="goToStep(5)">Back</button>
+                        <button class="btn btn-primary btn-large" onclick="goToStep(6)">Next: Review Cart</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 6: CART REVIEW -->
+            <section id="step-6" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-6"></div>
+
+                <div class="cart-review-layout">
+                    <!-- Order Summary -->
+                    <div class="order-summary-panel card">
+                        <h3>Your Order Summary</h3>
+
+                        <div class="summary-list-items" id="summary-bill-items">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+
+                        <div class="promo-code-input-area">
+                            <span class="input-label">Promo Code</span>
+                            <div class="promo-row-input">
+                                <input type="text" id="promo-code-field" placeholder="Enter promo code">
+                                <button class="btn btn-primary" onclick="applyPromoCode()">Apply</button>
+                            </div>
+                            <div id="promo-status-msg" class="promo-msg"></div>
+                        </div>
+
+                        <div class="total-amount-row">
+                            <span>Total / Amount</span>
+                            <span class="total-price-green" id="bill-grandtotal">RM 0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Visit Details -->
+                    <div class="visit-details-panel card">
+                        <h3>Visit Details</h3>
+                        <div class="detail-row">
+                            <span class="label">Date</span>
+                            <span class="value" id="visit-details-date">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Guests</span>
+                            <span class="value" id="visit-details-guests">0</span>
+                        </div>
+                        <div class="detail-info-footer">
+                            <span class="info-icon-blue">ℹ️</span>
+                            <span class="info-text">All prices are in MYR.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-footer flex-row justify-between mt-6 max-width-layout">
+                    <button class="btn btn-outline btn-large" onclick="goToStep(5)">Back</button>
+                    <button class="btn btn-primary btn-large" onclick="goToStep(7)">Next: Checkout</button>
+                </div>
+            </section>
+
+            <!-- STEP 7: LOGIN / GUEST CHECKOUT -->
+            <section id="step-7" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-7"></div>
+
+                <div class="step-card card">
+                    <div class="step-card-header text-center">
+                        <h2>Continue to Checkout</h2>
+                        <p>Login to your account or continue as guest</p>
+                    </div>
+
+                    <div class="checkout-choice-grid">
+                        <!-- Login Card -->
+                        <div class="choice-card">
+                            <div class="choice-avatar">👤</div>
+                            <h3>Login</h3>
+                            <p>Login to your account</p>
+                            <button class="btn btn-primary btn-block"
+                                onclick="revealCheckoutForm('login')">Login</button>
+                        </div>
+
+                        <!-- Register Card -->
+                        <div class="choice-card">
+                            <div class="choice-avatar register-avatar">➕</div>
+                            <h3>Register</h3>
+                            <p>Create new account</p>
+                            <button class="btn btn-primary btn-block"
+                                onclick="revealCheckoutForm('register')">Register</button>
+                        </div>
+
+                        <!-- Guest Card -->
+                        <div class="choice-card">
+                            <div class="choice-avatar guest-avatar">🛒</div>
+                            <h3>Guest Checkout</h3>
+                            <p>Continue without account</p>
+                            <button class="btn btn-primary btn-block" onclick="revealCheckoutForm('guest')">Continue as
+                                Guest</button>
+                        </div>
+                    </div>
+
+                    <!-- Expandable Form Drawers -->
+                    <div class="checkout-forms-drawer card mt-6 hidden" id="checkout-forms-container">
+                        <!-- Guest Form -->
+                        <div id="form-guest" class="checkout-form-panel">
+                            <h3>Billing Contact Information</h3>
+                            <form id="guest-form" onsubmit="submitCheckout(event, 'guest')">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Full Name</label>
+                                        <input type="text" id="guest-name" required placeholder="John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" id="guest-email" required placeholder="johndoe@example.com">
+                                        <small class="input-hint">Your e-tickets and QR receipt will be dispatched to
+                                            this email.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <input type="tel" id="guest-phone" required placeholder="+60123456789">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-large mt-4">Continue to Payment
+                                    Selection</button>
+                            </form>
+                        </div>
+
+                        <!-- Login Form -->
+                        <div id="form-login" class="checkout-form-panel">
+                            <h3>Sign In to Your Account</h3>
+                            <form id="login-form" onsubmit="submitCheckout(event, 'login')">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" id="login-email" required placeholder="member@zooworld.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="login-pass" required placeholder="••••••••">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-large mt-4">Sign In & Checkout</button>
+                            </form>
+                        </div>
+
+                        <!-- Register Form -->
+                        <div id="form-register" class="checkout-form-panel">
+                            <h3>Create New Account</h3>
+                            <form id="register-form" onsubmit="submitCheckout(event, 'register')">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>Full Name</label>
+                                        <input type="text" id="reg-name" required placeholder="John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" id="reg-email" required placeholder="johndoe@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Create Password</label>
+                                        <input type="password" id="reg-pass" required
+                                            placeholder="At least 8 characters">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-large mt-4">Create Account &
+                                    Proceed</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="action-footer mt-6">
+                        <button class="btn btn-outline btn-large" onclick="goToStep(6)">Back</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 8: PAYMENT SELECTION -->
+            <section id="step-8" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-8"></div>
+
+                <div class="step-card card">
+                    <div class="step-card-header">
+                        <h2>Select Payment Method</h2>
+                        <p>Choose your preferred payment option</p>
+                    </div>
+
+                    <div class="payment-option-grid">
+                        <!-- Card Option -->
+                        <div class="payment-method-card" id="pay-card" onclick="selectPaymentMethod('card')">
+                            <div class="method-icon">💳</div>
+                            <h3>Credit / Debit Card</h3>
+                            <p>Visa, Mastercard & more</p>
+                            <label class="radio-label">
+                                <input type="radio" name="payment_choice" id="rad-pay-card">
+                                <span class="custom-radio"></span>
+                            </label>
+                        </div>
+
+                        <!-- Online Banking Option -->
+                        <div class="payment-method-card" id="pay-banking" onclick="selectPaymentMethod('banking')">
+                            <div class="method-icon bank-icon">🏦</div>
+                            <h3>Online Banking</h3>
+                            <p>FPX & internet banking</p>
+                            <label class="radio-label">
+                                <input type="radio" name="payment_choice" id="rad-pay-banking">
+                                <span class="custom-radio"></span>
+                            </label>
+                        </div>
+
+                        <!-- E-Wallet Option -->
+                        <div class="payment-method-card" id="pay-wallet" onclick="selectPaymentMethod('wallet')">
+                            <div class="method-icon wallet-icon">👛</div>
+                            <h3>E-Wallet</h3>
+                            <p>Touch 'n Go, Boost, GrabPay</p>
+                            <label class="radio-label">
+                                <input type="radio" name="payment_choice" id="rad-pay-wallet">
+                                <span class="custom-radio"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Parameter fields -->
+                    <div class="payment-input-drawer card mt-6" id="payment-input-container">
+                        <div id="payment-details-default" class="pay-detail-mode active">
+                            <div class="centered-hint">
+                                <p>Please choose a payment method above to proceed with entering information.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card Form -->
+                        <div id="payment-details-card" class="pay-detail-mode">
+                            <h3>Card Credentials</h3>
+                            <div class="form-group">
+                                <label>Cardholder Name</label>
+                                <input type="text" id="card-holder-name" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Card Number</label>
+                                <input type="text" id="card-number" placeholder="4111 2222 3333 4444" maxlength="19">
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Expiry Date</label>
+                                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input type="password" id="card-cvv" placeholder="•••" maxlength="4">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block btn-large mt-4" onclick="triggerGateway()">Pay &
+                                Book Admission</button>
+                        </div>
+
+                        <!-- Banking FPX Form -->
+                        <div id="payment-details-banking" class="pay-detail-mode">
+                            <h3>Select Your Bank</h3>
+                            <div class="form-group">
+                                <label>Preferred Bank</label>
+                                <select id="fpx-bank-select">
+                                    <option value="">-- Select Bank --</option>
+                                    <option value="maybank">Maybank2u</option>
+                                    <option value="cimb">CIMB Clicks</option>
+                                    <option value="public">Public Bank</option>
+                                    <option value="rhb">RHB Now</option>
+                                    <option value="bankislam">Bank Islam</option>
+                                </select>
+                            </div>
+                            <p class="banking-notice">You will be redirected to your selected bank upon clicking pay
+                                below.</p>
+                            <button class="btn btn-primary btn-block btn-large mt-4" onclick="triggerGateway()">Connect
+                                via FPX</button>
+                        </div>
+
+                        <!-- Wallet Form -->
+                        <div id="payment-details-wallet" class="pay-detail-mode">
+                            <h3>Mobile E-Wallet Provider</h3>
+                            <div class="wallet-icon-grid">
+                                <div class="wallet-select-option" data-wallet="tng"
+                                    onclick="selectWalletProvider(this)">
+                                    <span>Touch 'n Go</span>
+                                </div>
+                                <div class="wallet-select-option" data-wallet="grab"
+                                    onclick="selectWalletProvider(this)">
+                                    <span>GrabPay</span>
+                                </div>
+                                <div class="wallet-select-option" data-wallet="boost"
+                                    onclick="selectWalletProvider(this)">
+                                    <span>Boost</span>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <label>Mobile Phone Number</label>
+                                <input type="tel" id="wallet-phone" placeholder="+60123456789">
+                            </div>
+                            <button class="btn btn-primary btn-block btn-large mt-4" onclick="triggerGateway()">Request
+                                Payment Push</button>
+                        </div>
+                    </div>
+
+                    <div class="action-footer flex-row justify-between mt-6">
+                        <button class="btn btn-outline btn-large" onclick="goToStep(7)">Back</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 9: PAYMENT PROCESSING -->
+            <section id="step-9" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-9"></div>
+
+                <div class="gateway-screen">
+                    <div class="gateway-container card">
+                        <div class="lock-graphic">🛡️</div>
+                        <h2>Secure Payment</h2>
+                        <p>You are being redirected to our secure payment gateway.</p>
+
+                        <div class="gateway-spinner-wrapper">
+                            <div class="gateway-spinner"></div>
+                        </div>
+                        <p class="processing-hint">Please do not close this window...</p>
+
+                        <div class="gateway-logos">
+                            <span class="logo-item">🔒 SSL Connection</span>
+                            <span class="logo-item">💳 Verified by Visa</span>
+                            <span class="logo-item">💳 Mastercard ID Check</span>
+                            <span class="logo-item">🏦 FPX Secure</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 10: PAYMENT SUCCESS -->
+            <section id="step-10" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-10"></div>
+
+                <div class="success-screen card text-center">
+                    <div class="success-checkmark-circle">✓</div>
+                    <h2>Payment Successful!</h2>
+                    <p>Thank you for your purchase.<br>Your transaction has been completed successfully.</p>
+
+                    <div class="success-action-buttons">
+                        <button class="btn btn-primary btn-large btn-step-width" onclick="goToStep(11)">View
+                            E-Ticket</button>
+                        <br>
+                        <a href="#" class="back-home-link" onclick="resetBookingFlow()">Back to Homepage</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 11: E-TICKET GENERATION -->
+            <section id="step-11" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-11"></div>
+
+                <div class="eticket-generation-layout">
+                    <!-- Left: Ticket card -->
+                    <div class="eticket-pass-card card">
+                        <div class="ticket-brand-header">
+                            <span class="brand">Zoo Adventure</span>
+                            <span class="ticket-lbl">E-TICKET</span>
+                        </div>
+                        <div class="ticket-barcode-area">
+                            <div class="qr-svg-wrapper" id="eticket-qr-container">
+                                <!-- QR rendered dynamically -->
+                            </div>
+                            <p class="barcode-instruction">Please present this QR code at the entrance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Details -->
+                    <div class="eticket-details-panel card">
+                        <div class="ticket-detail-item">
+                            <span class="label">Ticket Number</span>
+                            <strong class="value" id="eticket-number-val">-</strong>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="label">Visit Date</span>
+                            <strong class="value" id="eticket-date-val">-</strong>
+                        </div>
+                        <div class="ticket-detail-item">
+                            <span class="label">Ticket Type</span>
+                            <strong class="value" id="eticket-qty-val">-</strong>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="ticket-action-links">
+                            <div class="action-row" onclick="alert('Downloading ticket file...')">
+                                <span class="action-icon">📥</span>
+                                <div class="action-text">
+                                    <h4>Save Ticket</h4>
+                                    <p>Download your e-ticket</p>
+                                </div>
+                            </div>
+                            <div class="action-row" onclick="alert('Adding to wallet...')">
+                                <span class="action-icon">📱</span>
+                                <div class="action-text">
+                                    <h4>Add to Wallet</h4>
+                                    <p>Add to Apple Wallet / Google Pay</p>
+                                </div>
+                            </div>
+                            <div class="action-row" onclick="window.print()">
+                                <span class="action-icon">🖨️</span>
+                                <div class="action-text">
+                                    <h4>Print Ticket</h4>
+                                    <p>Print your ticket</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block btn-large mt-6" onclick="goToStep(12)">Download
+                            Ticket</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 12: TICKET DELIVERY -->
+            <section id="step-12" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-12"></div>
+
+                <div class="step-card card">
+                    <div class="step-card-header text-center">
+                        <h2>Your e-ticket has been sent!</h2>
+                        <p>We've emailed your ticket to <strong id="delivery-email-val">-</strong></p>
+                    </div>
+
+                    <div class="delivery-display-layout">
+                        <!-- Left: Smartphone envelope mockup -->
+                        <div class="delivery-visual">
+                            <div class="envelope-container">
+                                <div class="envelope-body">
+                                    <div class="phone-mockup">
+                                        <div class="phone-screen">
+                                            <div class="phone-header-notch"></div>
+                                            <div class="phone-content-qr">
+                                                <span class="phone-brand">Zoo Adventure</span>
+                                                <div class="phone-qr-box" id="delivery-phone-qr-container">
+                                                    <!-- Mini QR -->
+                                                </div>
+                                                <span class="phone-text">E-Ticket Confirmed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="envelope-paper"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Checklist -->
+                        <div class="delivery-instructions">
+                            <div class="chk-item">
+                                <span class="check-badge">✓</span>
+                                <div>
+                                    <h4>Check your inbox (and spam folder)</h4>
+                                </div>
+                            </div>
+                            <div class="chk-item">
+                                <span class="check-badge">✓</span>
+                                <div>
+                                    <h4>Show the QR code at the entrance</h4>
+                                </div>
+                            </div>
+                            <div class="chk-item">
+                                <span class="check-badge">✓</span>
+                                <div>
+                                    <h4>Enjoy your adventure!</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-footer text-center mt-6">
+                        <button class="btn btn-primary btn-large btn-step-width" onclick="showDashboard()">Go to My
+                            Bookings</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MY BOOKINGS DASHBOARD PORTAL (STEP 13 / VIEWPORT) -->
+            <section id="step-dashboard" class="booking-step">
+                <div class="dashboard-layout card">
+                    <div class="dashboard-header flex-row justify-between">
+                        <div>
+                            <h2>My Bookings Dashboard</h2>
+                            <p>Manage your orders, download QR e-tickets, or request cancellations.</p>
+                        </div>
+                        <button class="btn btn-outline" onclick="resetBookingFlow(2)">New Booking</button>
+                    </div>
+
+                    <!-- Search Filter Bar -->
+                    <div class="dashboard-search-bar mt-4">
+                        <div class="search-row">
+                            <input type="text" id="dashboard-search-input"
+                                placeholder="Search by Booking ID or Registered Email..." oninput="filterDashboard()">
+                            <button class="btn btn-primary" onclick="filterDashboard()">Search</button>
+                        </div>
+                    </div>
+
+                    <!-- Table list -->
+                    <div class="dashboard-table-wrapper mt-4">
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Booking ID</th>
+                                    <th>Type</th>
+                                    <th>Visit Date</th>
+                                    <th>Package</th>
+                                    <th>Tickets</th>
+                                    <th>Amount Paid</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-bookings-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STANDALONE ACCOMMODATION VIEWPORT -->
+            <section id="step-accommodation" class="booking-step">
+                <div class="funnel-breadcrumb-tracker" id="tracker-step-accommodation"></div>
+
+                <div class="step-card card" style="max-width:1000px; margin: 0 auto;">
+                    <div class="step-card-header">
+                        <h2>🏨 Accommodations Near ZooWorld</h2>
+                        <p>Book budget-friendly rental rooms, capsule pods, homestays, or resorts close to the zoo.
+                            Exclusively curated for our visitors.</p>
+                    </div>
+
+                    <!-- Filter & Search Controls -->
+                    <div class="hotel-filters-container">
+                        <div class="search-input-wrapper">
+                            <input type="text" id="hotel-search-input"
+                                placeholder="Search accommodations by name or type..." oninput="filterHotels()">
+                        </div>
+                        <div class="filter-options-row">
+                            <select id="hotel-price-filter" onchange="filterHotels()">
+                                <option value="all">All Prices</option>
+                                <option value="budget">Budget (Under RM 60)</option>
+                                <option value="standard">Standard (RM 60 - RM 150)</option>
+                                <option value="luxury">Premium (Over RM 150)</option>
+                            </select>
+                            <select id="hotel-distance-filter" onchange="filterHotels()">
+                                <option value="all">Any Distance</option>
+                                <option value="1">Within 1 km</option>
+                                <option value="2">Within 2 km</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Hotel List Grid -->
+                    <div class="hotels-grid mt-6" id="hotels-list-grid">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <p>&copy; 2026 Eyesoft Technology. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- AUTH MODULE MODAL -->
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-container card">
+            <div class="modal-header flex-row justify-between">
+                <h3 id="auth-modal-title">Sign In</h3>
+                <button class="close-modal-btn" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div class="modal-body mt-2">
+                <form id="auth-modal-form" onsubmit="handleAuthSubmit(event)">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="auth-modal-email" required placeholder="member@zooadventure.com">
+                    </div>
+                    <div class="form-group" id="auth-field-name" class="hidden">
+                        <label>Full Name</label>
+                        <input type="text" id="auth-modal-name" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="auth-modal-pass" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-4" id="auth-modal-btn">Sign In</button>
+                </form>
+                <div class="modal-toggle-prompt mt-4 text-center">
+                    <span id="auth-modal-prompt-text">Don't have an account?</span>
+                    <a href="#" onclick="toggleAuthModalMode()" id="auth-modal-toggle-link">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TICKET PREVIEW MODAL -->
+    <div id="ticket-modal" class="modal-overlay hidden">
+        <div class="modal-container card">
+            <div class="modal-header flex-row justify-between">
+                <h3>Retrieve E-Ticket</h3>
+                <button class="close-modal-btn" onclick="closeModal('ticket-modal')">&times;</button>
+            </div>
+            <div class="modal-body text-center" id="ticket-modal-body">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- GENERAL STATIC MODALS -->
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-container card">
+            <div class="modal-header flex-row justify-between">
+                <h3>About Zoo Adventure</h3>
+                <button class="close-modal-btn" onclick="closeModal('about-modal')">&times;</button>
+            </div>
+            <div class="modal-body mt-2">
+                <p>Welcome to Zoo Adventure! We are a world-class conservation and wildlife sanctuary dedicated to
+                    preserving global habitats and educating generations of wilderness explorers. Explore, Learn, and
+                    Protect with us.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal-overlay hidden">
+        <div class="modal-container card">
+            <div class="modal-header flex-row justify-between">
+                <h3>Contact Support</h3>
+                <button class="close-modal-btn" onclick="closeModal('contact-modal')">&times;</button>
+            </div>
+            <div class="modal-body mt-2">
+                <p>Have questions about your tickets? Reach our support desk 24/7:</p>
+                <p class="mt-2">📧 <strong>support@zooadventure.com</strong></p>
+                <p>📞 <strong>+60 3-1800-88-ZOO</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOTEL STANDALONE CHECKOUT MODAL -->
+    <div id="hotel-checkout-modal" class="modal-overlay hidden">
+        <div class="modal-container card" style="max-width: 600px; width: 95%;">
+            <div class="modal-header flex-row justify-between">
+                <h3>🏨 Book Your Stay</h3>
+                <button class="close-modal-btn" onclick="closeModal('hotel-checkout-modal')">&times;</button>
+            </div>
+            <div class="modal-body mt-2">
+                <div class="hotel-summary-mini-card flex-row align-center mb-4">
+                    <img id="modal-hotel-img" src="" alt="Hotel" class="modal-hotel-thumb">
+                    <div class="modal-hotel-info">
+                        <h4 id="modal-hotel-name">-</h4>
+                        <div>
+                            <span id="modal-hotel-rating" class="stars">⭐⭐⭐⭐</span>
+                            <span id="modal-hotel-distance" class="dist-badge">0.5 km from zoo</span>
+                        </div>
+                        <p class="modal-hotel-rate">RM <span id="modal-hotel-price">-</span> / night</p>
+                    </div>
+                </div>
+
+                <form id="hotel-checkout-form" onsubmit="handleHotelCheckoutSubmit(event)">
+                    <!-- Selection of stay dates -->
+                    <div class="form-row flex-row gap-4">
+                        <div class="form-group flex-1">
+                            <label>Check-in Date</label>
+                            <input type="date" id="hotel-check-in" required onchange="calculateHotelCheckoutPrice()">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label>Check-out Date</label>
+                            <input type="date" id="hotel-check-out" required onchange="calculateHotelCheckoutPrice()">
+                        </div>
+                    </div>
+
+                    <div class="form-row flex-row gap-4 align-center">
+                        <div class="form-group flex-1">
+                            <label>Number of Rooms</label>
+                            <select id="hotel-rooms-count" onchange="calculateHotelCheckoutPrice()">
+                                <option value="1">1 Room</option>
+                                <option value="2">2 Rooms</option>
+                                <option value="3">3 Rooms</option>
+                                <option value="4">4 Rooms</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1"
+                            style="justify-content: flex-end; display: flex; flex-direction: column; text-align: right;">
+                            <span class="total-stay-nights" id="hotel-stay-nights"
+                                style="font-weight: 600; color: var(--text-muted); margin-top: 24px;">0 nights</span>
+                        </div>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <!-- Guest details -->
+                    <div class="form-group">
+                        <label>Guest Full Name</label>
+                        <input type="text" id="hotel-guest-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-row flex-row gap-4">
+                        <div class="form-group flex-1">
+                            <label>Email Address</label>
+                            <input type="email" id="hotel-guest-email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label>Phone Number</label>
+                            <input type="tel" id="hotel-guest-phone" required placeholder="+60123456789">
+                        </div>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <!-- Payment details -->
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-method-selector-row">
+                            <label class="pay-option-pill">
+                                <input type="radio" name="hotel_payment_choice" value="card" checked
+                                    onchange="toggleHotelPaymentFields()">
+                                <span>💳 Card</span>
+                            </label>
+                            <label class="pay-option-pill">
+                                <input type="radio" name="hotel_payment_choice" value="fpx"
+                                    onchange="toggleHotelPaymentFields()">
+                                <span>🏦 FPX Bank</span>
+                            </label>
+                            <label class="pay-option-pill">
+                                <input type="radio" name="hotel_payment_choice" value="wallet"
+                                    onchange="toggleHotelPaymentFields()">
+                                <span>📱 E-Wallet</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Sub-forms -->
+                    <div id="hotel-pay-card-fields" class="hotel-pay-fields">
+                        <div class="form-group">
+                            <label>Cardholder Name</label>
+                            <input type="text" id="hotel-card-name" placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" id="hotel-card-num" placeholder="1234 5678 1234 5678">
+                        </div>
+                        <div class="form-row flex-row gap-4">
+                            <div class="form-group flex-1">
+                                <label>Expiry Date</label>
+                                <input type="text" id="hotel-card-expiry" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>CVV</label>
+                                <input type="password" id="hotel-card-cvv" placeholder="•••">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="hotel-pay-fpx-fields" class="hotel-pay-fields hidden">
+                        <div class="form-group">
+                            <label>Select Bank</label>
+                            <select id="hotel-fpx-bank">
+                                <option value="">-- Select Bank --</option>
+                                <option value="maybank2u">Maybank2U</option>
+                                <option value="cimbclicks">CIMB Clicks</option>
+                                <option value="publicbank">Public Bank</option>
+                                <option value="rhb">RHB Now</option>
+                                <option value="hongleong">Hong Leong Connect</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="hotel-pay-wallet-fields" class="hotel-pay-fields hidden">
+                        <div class="form-group">
+                            <label>E-Wallet Phone Number</label>
+                            <input type="tel" id="hotel-wallet-phone" placeholder="+60123456789">
+                        </div>
+                    </div>
+
+                    <!-- Totals and Action -->
+                    <div class="hotel-checkout-total-row mt-4 flex-row justify-between align-center"
+                        style="border-top: 1.5px solid var(--card-border); padding-top: 16px;">
+                        <span>Total Price (Incl. Tax)</span>
+                        <strong class="hotel-total-price" id="hotel-checkout-grand-total"
+                            style="font-size: 24px; color: var(--brand-green);">RM 0.00</strong>
+                    </div>
+
+                    <input type="hidden" id="hotel-checkout-key">
+                    <button type="submit" class="btn btn-primary btn-block btn-large mt-4">Pay &amp; Confirm
+                        Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- HOTEL BOOKING SUCCESS MODAL -->
+    <div id="hotel-success-modal" class="modal-overlay hidden">
+        <div class="modal-container card text-center" style="max-width: 500px; padding: 40px;">
+            <div class="success-screen">
+                <div class="success-checkmark-circle">✓</div>
+                <h2>Payment Successful!</h2>
+                <p>Thank you for your purchase.<br>
+                    Your accommodation booking at <strong id="success-hotel-name">-</strong> has been completed
+                    successfully.<br>
+                    Booking ID: <strong id="success-hotel-booking-id">-</strong>
+                </p>
+
+                <div class="success-action-buttons">
+                    <button class="btn btn-primary btn-large btn-step-width"
+                        onclick="closeModal('hotel-success-modal'); viewTicketReceipt(document.getElementById('success-hotel-booking-id').innerText)">View
+                        Booking Voucher</button>
+                    <br>
+                    <a href="#" class="back-home-link"
+                        onclick="closeModal('hotel-success-modal'); resetBookingFlow()">Back to Homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STANDALONE ACCOMMODATION GALLERY & DETAIL MODAL -->
+    <div id="accom-detail-modal" class="modal-overlay hidden">
+        <div class="modal-container card ticket-preview-modal-width" style="max-width: 700px;">
+            <div class="modal-header flex-row justify-between"
+                style="border-bottom: 1.5px solid var(--card-border); padding-bottom: 12px;">
+                <h3 id="modal-accom-detail-name" style="font-weight: 800; font-size: 18px;">Accommodation Details</h3>
+                <button class="close-modal-btn" onclick="closeModal('accom-detail-modal')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-top: 15px;">
+                <!-- Gallery Carousel -->
+                <div class="accom-carousel-container"
+                    style="position: relative; width: 100%; height: 280px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; background-color: #f0f0f0;">
+                    <!-- Slides Container -->
+                    <div id="accom-carousel-slides" style="width: 100%; height: 100%; position: relative;">
+                        <!-- Dynamically populated slides -->
+                    </div>
+
+                    <!-- Left/Right Arrows -->
+                    <button class="carousel-arrow prev" onclick="shiftAccomCarousel(-1, true)"
+                        onmouseover="this.style.background='#fff'"
+                        onmouseout="this.style.background='rgba(255,255,255,0.85)'"
+                        style="position: absolute; top: 50%; left: 12px; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; box-shadow: var(--shadow-soft); z-index: 10; color: #333; transition: background 0.2s;">&#10094;</button>
+                    <button class="carousel-arrow next" onclick="shiftAccomCarousel(1, true)"
+                        onmouseover="this.style.background='#fff'"
+                        onmouseout="this.style.background='rgba(255,255,255,0.85)'"
+                        style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; box-shadow: var(--shadow-soft); z-index: 10; color: #333; transition: background 0.2s;">&#10095;</button>
+
+                    <!-- Dots Indicators -->
+                    <div id="accom-carousel-dots"
+                        style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10;">
+                        <!-- Dynamically populated dots -->
+                    </div>
+                </div>
+
+                <!-- Info Grid -->
+                <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; text-align: left;">
+                    <div>
+                        <h4 style="margin-bottom: 6px; font-weight: 700; font-size: 14px;">Description</h4>
+                        <p id="modal-accom-detail-desc"
+                            style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;">
+                        </p>
+
+                        <h4 style="margin-bottom: 8px; font-weight: 700; font-size: 14px;">Guest Reviews</h4>
+                        <div id="modal-accom-detail-reviews" style="display:flex; flex-direction:column; gap: 10px;">
+                        </div>
+                    </div>
+
+                    <div
+                        style="background-color: var(--primary-light); padding: 18px; border-radius: 10px; border: 1.5px solid var(--card-border); height: fit-content;">
+                        <h4 style="margin-bottom: 12px; font-weight: 700; text-align: center; font-size: 14px;">Stay
+                            Summary</h4>
+                        <div
+                            style="display:flex; flex-direction:column; gap: 8px; font-size:13px; margin-bottom: 16px;">
+                            <div class="flex-row justify-between">
+                                <span style="color: var(--text-secondary);">Price:</span>
+                                <strong>RM <span id="modal-accom-detail-price"></span> / night</strong>
+                            </div>
+                            <div class="flex-row justify-between">
+                                <span style="color: var(--text-secondary);">Distance:</span>
+                                <strong id="modal-accom-detail-dist"></strong>
+                            </div>
+                            <div class="flex-row justify-between">
+                                <span style="color: var(--text-secondary);">Rating:</span>
+                                <strong id="modal-accom-detail-stars" style="color: #FFB300;"></strong>
+                            </div>
+                        </div>
+                        <input type="hidden" id="modal-accom-detail-key">
+                        <button class="btn btn-primary btn-block"
+                            onclick="closeModal('accom-detail-modal'); openHotelCheckout(document.getElementById('modal-accom-detail-key').value)">Book
+                            This Place</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANIMATED FLYING/PERCHING TROPICAL BIRD -->
+    <div id="flying-bird">
+        <svg id="flying-bird-svg" viewBox="0 0 100 100" width="55" height="55"
+            style="display: block; overflow: visible;">
+            <defs>
+                <!-- Head Crimson Red (Top of Head & upper wing coverts) -->
+                <linearGradient id="grad-crimson" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FF1744" />
+                    <stop offset="60%" stop-color="#D50000" />
+                    <stop offset="100%" stop-color="#9A0007" />
+                </linearGradient>
+                <!-- Belly Highlight Gold-Yellow Gradient (Added more yellow) -->
+                <linearGradient id="grad-chest-yellow" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFEA00" />
+                    <stop offset="50%" stop-color="#FFD54F" />
+                    <stop offset="100%" stop-color="#FF9100" />
+                </linearGradient>
+                <!-- Face Turquoise (Cheek/Throat patch) -->
+                <linearGradient id="grad-face-turquoise" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#B2EBF2" />
+                    <stop offset="50%" stop-color="#00E5FF" />
+                    <stop offset="100%" stop-color="#00B0FF" />
+                </linearGradient>
+                <!-- Face Gold (Lower cheek flare) -->
+                <linearGradient id="grad-face-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFEA00" />
+                    <stop offset="100%" stop-color="#FF9100" />
+                </linearGradient>
+                <!-- Beak Orange-Red -->
+                <linearGradient id="grad-beak" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFD54F" />
+                    <stop offset="60%" stop-color="#FF6E40" />
+                    <stop offset="100%" stop-color="#DD2C00" />
+                </linearGradient>
+                <!-- Flight Feathers Cyan-Blue Gradient (Primaries) -->
+                <linearGradient id="grad-flight-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00E5FF" />
+                    <stop offset="50%" stop-color="#2979FF" />
+                    <stop offset="100%" stop-color="#1A237E" />
+                </linearGradient>
+                <!-- Shadowed Flight Feathers Blue (Far Wing Primaries) -->
+                <linearGradient id="grad-flight-blue-far" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00B0FF" />
+                    <stop offset="60%" stop-color="#1565C0" />
+                    <stop offset="100%" stop-color="#0D47A1" />
+                </linearGradient>
+            </defs>
+
+            <!-- Element for JS animation state control to avoid console TypeErrors -->
+            <path id="bird-wing-inner" d="" style="display: none;" />
+
+            <!-- Wing Far (behind body, shadowed) -->
+            <g id="bird-wing-far">
+                <!-- Red Coverts -->
+                <path d="M 40 38 C 38 23, 27 23, 34 39 Z" fill="url(#grad-crimson)" />
+                <path d="M 40 38 C 35 18, 22 20, 31 40 Z" fill="url(#grad-crimson)" />
+                <!-- Orange/Gold Coverts -->
+                <path d="M 40 38 C 31 13, 16 16, 28 41 Z" fill="url(#grad-face-gold)" />
+                <path d="M 40 38 C 27 10, 10 13, 25 41 Z" fill="url(#grad-face-gold)" />
+                <!-- Blue Flight feathers (Primaries) -->
+                <path d="M 40 38 C 25 6, 6 10, 22 42 Z" fill="url(#grad-flight-blue-far)" />
+                <path d="M 40 38 C 22 4, 2 8, 19 42 Z" fill="url(#grad-flight-blue-far)" />
+                <path d="M 40 38 C 19 2, -2 6, 16 43 Z" fill="url(#grad-flight-blue-far)" />
+                <path d="M 40 38 C 15 0, -6 4, 13 43 Z" fill="url(#grad-flight-blue-far)" />
+                <path d="M 40 38 C 11 -2, -10 2, 10 44 Z" fill="url(#grad-flight-blue-far)" />
+                <path d="M 40 38 C 7 -4, -14 0, 7 44 Z" fill="url(#grad-flight-blue-far)" />
+            </g>
+
+            <!-- 11-Feather Ultra Lush Tail Feathers Group (Ekor Sangat Lebat) -->
+            <g id="bird-tail">
+                <!-- Left Outer Short (Yellow) -->
+                <path d="M 25 48 C 22 50, 10 64, 2 72 C 8 64, 18 54, 25 48 Z" fill="url(#grad-face-gold)" />
+                <!-- Left Outer Med (Red-Orange) -->
+                <path d="M 25 49 C 20 53, 5 72, -5 82 C 3 72, 15 58, 25 49 Z" fill="url(#grad-beak)" />
+                <!-- Left Mid-Short (Cyan-Blue) -->
+                <path d="M 24 50 C 17 55, 0 78, -12 92 C -3 80, 13 62, 24 50 Z" fill="url(#grad-flight-blue)" />
+                <!-- Left Mid-Long (Gold-Yellow) -->
+                <path d="M 24 51 C 15 57, -4 84, -18 100 C -8 88, 10 68, 24 51 Z" fill="url(#grad-chest-yellow)" />
+                <!-- Left Long (Crimson) -->
+                <path d="M 23 52 C 13 60, -8 90, -24 108 C -12 94, 8 72, 23 52 Z" fill="url(#grad-crimson)" />
+                <!-- Center Longest (Cyan-Blue) -->
+                <path d="M 22 53 C 11 63, -12 96, -28 116 C -15 100, 5 78, 22 53 Z" fill="url(#grad-flight-blue)" />
+                <!-- Right Long (Gold-Yellow) -->
+                <path d="M 21 54 C 12 64, -8 94, -22 112 C -11 96, 7 78, 21 54 Z" fill="url(#grad-chest-yellow)" />
+                <!-- Right Mid-Long (Turquoise) -->
+                <path d="M 20 55 C 13 65, -2 90, -14 104 C -5 90, 9 76, 20 55 Z" fill="url(#grad-face-turquoise)" />
+                <!-- Right Mid-Short (Red-Orange) -->
+                <path d="M 19 56 C 14 65, 3 84, -6 96 C 1 82, 11 72, 19 56 Z" fill="url(#grad-beak)" />
+                <!-- Right Outer Med (Yellow) -->
+                <path d="M 18 57 C 15 65, 8 78, 1 88 C 6 76, 13 67, 18 57 Z" fill="url(#grad-face-gold)" />
+                <!-- Right Outer Short (Cyan) -->
+                <path d="M 17 58 C 16 64, 11 72, 6 78 C 10 70, 14 64, 17 58 Z" fill="url(#grad-flight-blue)" />
+            </g>
+
+            <!-- Talons/Feet tucked under the belly -->
+            <path d="M 42 61 C 41 64, 44 66, 46 62 C 44 61, 43 60, 42 61 Z" fill="#616161" />
+            <path d="M 46 59 C 45 62, 48 64, 50 60 C 48 59, 47 58, 46 59 Z" fill="#616161" />
+
+            <!-- Body (Crimson base) -->
+            <path d="M 30 40 C 20 40, 20 62, 42 62 C 60 62, 65 48, 52 40 Z" fill="url(#grad-crimson)" />
+            <!-- Chest & Belly patch (Bright Yellow Highlight) -->
+            <path d="M 32 44 C 28 52, 42 62, 50 56 C 45 53, 38 48, 32 44 Z" fill="url(#grad-chest-yellow)" />
+
+            <!-- Head Group with Fluffy Feather Details -->
+            <g id="bird-head-group">
+                <!-- Head Base (Crimson Red) -->
+                <circle cx="60" cy="32" r="12" fill="url(#grad-crimson)" />
+                <!-- Turquoise cheek/throat patch -->
+                <path d="M 52 38 C 50 32, 56 26, 62 26 C 68 26, 70 32, 64 38 C 58 42, 54 40, 52 38 Z"
+                    fill="url(#grad-face-turquoise)" />
+                <!-- Gold lower cheek flare -->
+                <path d="M 50 36 C 48 38, 52 44, 56 42 C 58 40, 54 36, 50 36 Z" fill="url(#grad-face-gold)" />
+
+                <!-- Highly Feathered Exotic Crest (5 layered feathers) -->
+                <path d="M 58 22 C 52 8, 58 10, 56 21 Z" fill="#D500F9" />
+                <path d="M 61 21 C 56 6, 63 8, 60 20 Z" fill="#FF1744" />
+                <path d="M 64 22 C 61 10, 68 12, 63 22 Z" fill="#FFEA00" />
+                <path d="M 54 24 C 47 12, 54 16, 52 23 Z" fill="#FFD54F" />
+                <path d="M 50 28 C 42 20, 50 24, 49 29 Z" fill="#00E5FF" />
+
+                <!-- Forehead Feather Flare (Yellow highlight) -->
+                <path d="M 66 24 C 64 22, 69 20, 68 25 Z" fill="#FFEA00" />
+
+                <!-- Fluffy Neck/Nape feathers fanning back -->
+                <path d="M 49 34 C 41 32, 46 36, 49 37 Z" fill="#FF1744" />
+                <path d="M 48 38 C 40 38, 45 42, 49 41 Z" fill="#00E5FF" />
+                <path d="M 50 42 C 43 45, 47 48, 52 45 Z" fill="#FFEA00" />
+
+                <!-- Beak: Curved Parrot Beak -->
+                <path d="M 70 27 C 76 27, 81 31, 75 37 C 72 37, 69 33, 70 27 Z" fill="url(#grad-beak)" />
+                <path d="M 69 32 C 73 34, 75 37, 71 37 C 69 37, 68 34, 69 32 Z" fill="#D84315" />
+                <!-- Eye: Turquoise eye ring & black pupil & highlight -->
+                <circle cx="62" cy="29" r="3.5" fill="#E0F7FA" opacity="0.8" />
+                <circle cx="62" cy="29" r="2" fill="#000" />
+                <circle cx="62.7" cy="28.3" r="0.8" fill="#fff" />
+            </g>
+
+            <!-- Wing Near Group -->
+            <g id="bird-wing">
+                <!-- Red Coverts -->
+                <path d="M 45 42 C 43 27, 32 27, 39 43 Z" fill="url(#grad-crimson)" />
+                <path d="M 45 42 C 40 22, 27 24, 36 44 Z" fill="url(#grad-crimson)" />
+                <!-- Orange/Gold Coverts -->
+                <path d="M 45 42 C 36 17, 21 20, 33 45 Z" fill="url(#grad-face-gold)" />
+                <path d="M 45 42 C 32 14, 15 17, 30 45 Z" fill="url(#grad-face-gold)" />
+                <!-- Blue Flight feathers (Primaries with Yellow-tipped feathers) -->
+                <path d="M 45 42 C 30 10, 10 14, 27 46 Z" fill="url(#grad-flight-blue)" />
+                <path d="M 45 42 C 27 8, 6 12, 24 46 Z" fill="url(#grad-flight-blue)" />
+                <path d="M 45 42 C 24 6, 2 10, 21 47 Z" fill="url(#grad-flight-blue)" />
+                <path d="M 45 42 C 20 4, -2 8, 18 47 Z" fill="url(#grad-flight-blue)" />
+                <path d="M 45 42 C 16 2, -6 6, 15 48 Z" fill="url(#grad-face-gold)" />
+                <path d="M 45 42 C 12 0, -10 4, 12 48 Z" fill="url(#grad-face-gold)" />
+                <path d="M 45 42 C 8 -2, -14 2, 9 49 Z" fill="#FFEA00" />
+            </g>
+        </svg>
+    </div>
+
+    <style>
+        #flying-bird {
+            position: fixed;
+            /* Always stay in viewport (sentiasa ada di depan mata user) */
+            top: 200px;
+            left: -100px;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.18s ease-out;
+            perspective: 600px;
+            transform-style: preserve-3d;
+        }
+
+        #flying-bird-svg {
+            display: block;
+            overflow: visible;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes bird-wing-flap-3d {
+
+            0%,
+            100% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+            50% {
+                transform: rotateX(-20deg) rotateY(-75deg) rotateZ(-30deg);
+            }
+        }
+
+        @keyframes bird-wing-flap-inner-3d {
+
+            0%,
+            100% {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0.9);
+            }
+
+            50% {
+                transform: rotateX(-15deg) rotateY(-60deg) rotateZ(-25deg) scale(0.75);
+            }
+        }
+
+        @keyframes bird-wing-flap-far-3d {
+
+            0%,
+            100% {
+                transform: rotateX(10deg) rotateY(15deg) rotateZ(10deg) scale(0.95);
+            }
+
+            50% {
+                transform: rotateX(25deg) rotateY(60deg) rotateZ(35deg) scale(0.8);
+            }
+        }
+
+        @keyframes bird-tail-flutter {
+
+            0%,
+            100% {
+                transform: rotate(0deg) skewY(0deg);
+            }
+
+            25% {
+                transform: rotate(4deg) skewY(3deg);
+            }
+
+            50% {
+                transform: rotate(-3deg) skewY(-2deg);
+            }
+
+            75% {
+                transform: rotate(2deg) skewY(1deg);
+            }
+        }
+
+        #bird-wing {
+            transform-origin: 45px 42px;
+            animation: bird-wing-flap-3d 0.38s infinite ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        #bird-wing-far {
+            transform-origin: 40px 38px;
+            animation: bird-wing-flap-far-3d 0.38s infinite ease-in-out;
+            transform-style: preserve-3d;
+            opacity: 0.85;
+        }
+
+        #bird-tail {
+            transform-origin: 25px 53px;
+            animation: bird-tail-flutter 0.22s infinite ease-in-out;
+            /* High-frequency flutter animation */
+            transform-style: preserve-3d;
+        }
+
+        @keyframes bird-peck {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            30%,
+            70% {
+                transform: rotate(15deg);
+            }
+
+            50% {
+                transform: rotate(32deg);
+            }
+        }
+
+        @keyframes bird-head-bob {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            30% {
+                transform: rotate(8deg);
+            }
+
+            60% {
+                transform: rotate(-8deg);
+            }
+        }
+
+        .bird-pecking {
+            transform-origin: 60px 32px;
+            animation: bird-peck 0.5s 3 ease-in-out;
+        }
+
+        .bird-head-bobbing {
+            transform-origin: 60px 32px;
+            animation: bird-head-bob 1.8s infinite ease-in-out;
+        }
+    </style>
+
+    <script>
+        (function () {
+            const bird = document.getElementById("flying-bird");
+            const wing1 = document.getElementById("bird-wing");
+            const wing2 = document.getElementById("bird-wing-inner");
+            const head = document.getElementById("bird-head-group");
+            let posX = -100, posY = 200, targetX = window.innerWidth / 2, targetY = 150;
+            let isPerched = false, perchedElement = null, pendingPerchElement = null, perchTimer = 0, speed = 1.2;
+
+            function findPerchTarget() {
+                let elements = [];
+                const selectorList = [".logo-main", ".nav-link", "h1", "h2", "h3", "h4", "button.btn", ".btn", ".funnel-dot", ".package-card", ".accom-card", ".ticket-tier", ".feature-card", ".guarantee-badge", "p", "strong"];
+                document.querySelectorAll(selectorList.join(", ")).forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    // Ensure elements are currently inside viewport
+                    if (rect.width > 0 && rect.height > 0 && rect.top > 60 && rect.bottom < window.innerHeight - 60 && rect.left > 20 && rect.right < window.innerWidth - 20) {
+                        elements.push(el);
+                    }
+                });
+                if (elements.length > 0) {
+                    const el = elements[Math.floor(Math.random() * elements.length)];
+                    const rect = el.getBoundingClientRect();
+                    return { element: el, x: rect.left + rect.width / 2 - 25, y: rect.top - 46 };
+                }
+                return { element: null, x: Math.random() * (window.innerWidth - 120) + 60, y: Math.random() * (window.innerHeight - 250) + 120 };
+            }
+
+            function tick() {
+                if (isPerched) {
+                    if (perchedElement) {
+                        const rect = perchedElement.getBoundingClientRect();
+                        // If perched element moves outside viewport, fly away
+                        if (rect.width === 0 || rect.height === 0 || rect.bottom < 0 || rect.top > window.innerHeight) {
+                            isPerched = false; perchedElement = null; wing1.style.animationPlayState = "running"; head.className = "";
+                            const newTarget = findPerchTarget(); targetX = newTarget.x; targetY = newTarget.y; pendingPerchElement = newTarget.element;
+                        } else {
+                            const faceDir = targetX < posX ? -1 : 1;
+                            bird.style.transform = `scaleX(${faceDir}) rotateZ(0deg) rotateY(15deg)`;
+                            posX = rect.left + rect.width / 2 - 25;
+                            posY = rect.top - 46;
+                            bird.style.left = `${posX}px`; bird.style.top = `${posY}px`;
+                        }
+                    }
+                    if (isPerched) {
+                        perchTimer -= 16.7;
+                        if (perchTimer <= 0) {
+                            isPerched = false; perchedElement = null; wing1.style.animationPlayState = "running"; head.className = "";
+                            const newTarget = findPerchTarget(); targetX = newTarget.x; targetY = newTarget.y; pendingPerchElement = newTarget.element;
+                        }
+                    }
+                } else {
+                    const minX = 20, maxX = window.innerWidth - 75, minY = 40, maxY = window.innerHeight - 75;
+                    targetX = Math.max(minX, Math.min(maxX, targetX)); targetY = Math.max(minY, Math.min(maxY, targetY));
+                    const dx = targetX - posX, dy = targetY - posY, distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 5) {
+                        if (pendingPerchElement) {
+                            isPerched = true; perchedElement = pendingPerchElement; pendingPerchElement = null; perchTimer = Math.random() * 6000 + 5000;
+                            wing1.style.animationPlayState = "paused"; head.className = "bird-pecking";
+                            const currentPerched = perchedElement;
+                            setTimeout(() => { if (isPerched && perchedElement === currentPerched) head.className = "bird-head-bobbing"; }, 1500);
+                        } else {
+                            if (Math.random() < 0.85) { const perch = findPerchTarget(); targetX = perch.x; targetY = perch.y; pendingPerchElement = perch.element; }
+                            else { targetX = Math.random() * (window.innerWidth - 120) + 60; targetY = Math.random() * (window.innerHeight - 250) + 120; pendingPerchElement = null; }
+                        }
+                    } else {
+                        const moveStep = Math.min(speed, distance);
+                        const angleRad = Math.atan2(dy, dx);
+                        posX += Math.cos(angleRad) * moveStep;
+                        posY += Math.sin(angleRad) * moveStep;
+
+                        let climbAngle = (dy / (Math.abs(dx) + 0.1)) * 22;
+                        climbAngle = Math.max(-22, Math.min(22, climbAngle));
+
+                        if (dx < -5) {
+                            bird.style.transform = `scaleX(-1) rotateZ(${-climbAngle}deg) rotateY(15deg)`;
+                        } else if (dx > 5) {
+                            bird.style.transform = `scaleX(1) rotateZ(${climbAngle}deg) rotateY(15deg)`;
+                        }
+
+                        posX = Math.max(minX, Math.min(maxX, posX));
+                        posY = Math.max(minY, Math.min(maxY, posY));
+
+                        bird.style.left = `${posX}px`;
+                        bird.style.top = `${posY}px`;
+                    }
+                }
+
+                requestAnimationFrame(tick);
+            }
+
+            const initDest = findPerchTarget();
+            targetX = initDest.x;
+            targetY = initDest.y;
+            pendingPerchElement = initDest.element;
+
+            requestAnimationFrame(tick);
+        })();
+    </script>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
