@@ -1198,24 +1198,24 @@ function renderRevenueDashboard(bookings) {
 
     summaryRow.innerHTML = `
         <div class="revenue-stat-card">
-            <span class="revenue-stat-label">Total Revenue</span>
-            <span class="revenue-stat-value" style="color:var(--accent-green);">RM ${totalRevenue.toFixed(2)}</span>
-            <span class="revenue-stat-sub">Across ${activeBookings.length} orders</span>
+            <div class="revenue-stat-label">Total Revenue</div>
+            <div class="revenue-stat-value" style="color:var(--accent-green);">RM ${totalRevenue.toFixed(2)}</div>
+            <div class="revenue-stat-sub">Across ${activeBookings.length} orders</div>
         </div>
         <div class="revenue-stat-card">
-            <span class="revenue-stat-label">Ticket Revenue</span>
-            <span class="revenue-stat-value">RM ${ticketRev.toFixed(2)}</span>
-            <span class="revenue-stat-sub">${((ticketRev / (totalRevenue || 1)) * 100).toFixed(0)}% of sales</span>
+            <div class="revenue-stat-label">Ticket Revenue</div>
+            <div class="revenue-stat-value">RM ${ticketRev.toFixed(2)}</div>
+            <div class="revenue-stat-sub">${((ticketRev / (totalRevenue || 1)) * 100).toFixed(0)}% of sales</div>
         </div>
         <div class="revenue-stat-card">
-            <span class="revenue-stat-label">Add-on Sales</span>
-            <span class="revenue-stat-value">RM ${addonsRev.toFixed(2)}</span>
-            <span class="revenue-stat-sub">Feeding & tram bookings</span>
+            <div class="revenue-stat-label">Add-on Sales</div>
+            <div class="revenue-stat-value">RM ${addonsRev.toFixed(2)}</div>
+            <div class="revenue-stat-sub">Feeding & tram bookings</div>
         </div>
         <div class="revenue-stat-card">
-            <span class="revenue-stat-label">Hotel Stay & Transport</span>
-            <span class="revenue-stat-value">RM ${(hotelRev + transportRev).toFixed(2)}</span>
-            <span class="revenue-stat-sub">Partner stays & shuttle service</span>
+            <div class="revenue-stat-label">Hotel Stay & Transport</div>
+            <div class="revenue-stat-value">RM ${(hotelRev + transportRev).toFixed(2)}</div>
+            <div class="revenue-stat-sub">Partner stays & shuttle service</div>
         </div>
     `;
 
